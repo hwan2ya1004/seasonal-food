@@ -5,7 +5,7 @@
   "main": "frontend/index.html",
   "scripts": {
     "start": "netlify dev",
-    "server": "node backend/server.js" // 백엔드 서버를 실행하는 명령 추가
+    "server": "node backend/server.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
