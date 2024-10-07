@@ -18,16 +18,27 @@ app.get('/api/food', async (req, res) => {
         const response = await axios.get(NONGSARO_API_URL, {
             params: {
                 apiKey: SERVICE_KEY, // API 키
-                year: req.query.year || '2024', // 기본 연도 2024
-                month: req.query.month || '10', // 기본 월 10월
+                year: req.query.year || '2024', // 연도 기본값 2024
+                month: req.query.month || '10', // 월 기본값 10월
             }
         });
 
-        // 클라이언트로 응답 데이터를 전달
-        res.json(response.data);
+        if (response.status === 200) {
+            // Nongsaro API에서 성공적으로 데이터를 받았을 때 클라이언트로 응답
+            res.json(response.data);
+        } else {
+            // 응답 상태 코드가 200이 아닌 경우 처리
+            res.status(response.status).json({ error: `Failed with status code: ${response.status}` });
+        }
+
     } catch (error) {
         console.error('Error fetching data from Nongsaro API:', error.message);
-        res.status(500).json({ error: 'Failed to fetch data from Nongsaro API' });
+
+        // 에러 응답을 클라이언트로 전송
+        res.status(500).json({
+            error: 'Failed to fetch data from Nongsaro API',
+            details: error.message
+        });
     }
 });
 
