@@ -1,5 +1,6 @@
 [build]
-  publish = "frontend"  # publish 경로를 프로젝트 경로에 맞게 수정하세요
+  publish = "frontend"
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/*"
