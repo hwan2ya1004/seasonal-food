@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/food'; // 백엔드 프록시 서버로 요청
+const apiUrl = '/.netlify/functions/food'; // Netlify Function 엔드포인트
 
 async function fetchMonthlyFood() {
     try {
@@ -11,13 +11,19 @@ async function fetchMonthlyFood() {
         const data = await response.json();
         displayFoodItems(data);
     } catch (error) {
-        console.error('Error fetching food data:', error);
+        console.error('Error fetching food data:', error.message);
     }
 }
 
 function displayFoodItems(data) {
     const foodContainer = document.getElementById('food-container');
-    
+
+    // 데이터가 올바르게 전달되었는지 확인
+    if (!data.items) {
+        console.error('No items found in the response');
+        return;
+    }
+
     data.items.forEach(item => {
         const foodDiv = document.createElement('div');
         foodDiv.classList.add('food-item');
