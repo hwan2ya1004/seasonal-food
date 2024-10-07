@@ -7,12 +7,12 @@ exports.handler = async function(event, context) {
     try {
         const response = await axios.get(NONGSARO_API_URL, {
             params: {
-                menuId: 'PS00001',  // API가 요구하는 파라미터가 정확히 설정되었는지 확인 필요
+                menuId: 'PS00001',  // API에서 요구하는 올바른 menuId 설정 필요
                 serviceKey: SERVICE_KEY
             }
         });
 
-        // 유효한 응답을 프론트엔드로 전달
+        // 프론트엔드로 전달할 응답 데이터
         return {
             statusCode: 200,
             body: JSON.stringify(response.data)
