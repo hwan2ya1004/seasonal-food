@@ -9,8 +9,8 @@ async function fetchMonthlyFood() {
         }
 
         const data = await response.json();
-        console.log('API Response:', data); // API 응답 확인
-        displayFoodItems(data);
+        console.log('API Response:', data); // API 응답을 콘솔에 출력
+        displayFoodItems(data); // 데이터를 화면에 출력하는 함수 호출
     } catch (error) {
         console.error('Error fetching food data:', error.message);
     }
@@ -19,13 +19,14 @@ async function fetchMonthlyFood() {
 function displayFoodItems(data) {
     const foodContainer = document.getElementById('food-container');
 
-    // API 응답이 'result'와 'items'로 구성된 경우
-    if (!data.result || !data.result.items) {
+    // 올바른 데이터 구조에 맞게 접근
+    if (!data.result || !data.result.foods) {
         console.error('No items found in the response');
         return;
     }
 
-    data.result.items.forEach(item => {
+    // 데이터를 화면에 추가
+    data.result.foods.forEach(item => {
         const foodDiv = document.createElement('div');
         foodDiv.classList.add('food-item');
 
@@ -39,4 +40,5 @@ function displayFoodItems(data) {
     });
 }
 
+// API 요청을 수행
 fetchMonthlyFood();
