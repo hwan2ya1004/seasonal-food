@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/food'; // 백엔드 서버를 통해 API 요청
+const apiUrl = 'http://localhost:3000/api/food'; // 백엔드 프록시 서버로 요청
 
 async function fetchMonthlyFood() {
     try {
