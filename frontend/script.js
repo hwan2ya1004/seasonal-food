@@ -1,4 +1,4 @@
-const apiUrl = '/.netlify/functions/food'; // Netlify Function 엔드포인트
+const apiUrl = '/.netlify/functions/food'; // Netlify Functions 엔드포인트
 
 async function fetchMonthlyFood() {
     try {
@@ -9,8 +9,8 @@ async function fetchMonthlyFood() {
         }
 
         const data = await response.json();
-        console.log('API Response:', data); // API 응답을 콘솔에 출력
-        displayFoodItems(data); // 데이터를 화면에 출력하는 함수 호출
+        console.log('API Response:', data); // API 응답 확인
+        displayFoodItems(data); // 데이터를 화면에 출력
     } catch (error) {
         console.error('Error fetching food data:', error.message);
     }
@@ -19,14 +19,13 @@ async function fetchMonthlyFood() {
 function displayFoodItems(data) {
     const foodContainer = document.getElementById('food-container');
 
-    // 올바른 데이터 구조에 맞게 접근
-    if (!data.result || !data.result.foods) {
+    // 응답 데이터 구조가 예상한 대로 들어오는지 확인
+    if (!data || Object.keys(data).length === 0) {
         console.error('No items found in the response');
         return;
     }
 
-    // 데이터를 화면에 추가
-    data.result.foods.forEach(item => {
+    data.items.forEach(item => { // items 배열에 맞게 데이터 출력
         const foodDiv = document.createElement('div');
         foodDiv.classList.add('food-item');
 
@@ -40,5 +39,4 @@ function displayFoodItems(data) {
     });
 }
 
-// API 요청을 수행
 fetchMonthlyFood();
