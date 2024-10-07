@@ -1,4 +1,4 @@
-const apiUrl = '/.netlify/functions/food'; // Netlify Functions 엔드포인트
+const apiUrl = '/.netlify/functions/food'; // 백엔드에서 데이터를 받기 위한 엔드포인트
 
 async function fetchMonthlyFood() {
     try {
@@ -9,13 +9,7 @@ async function fetchMonthlyFood() {
         }
 
         const data = await response.json();
-
-        // 응답 데이터가 JSON인지 확인 (HTML이 아닌지 확인)
-        if (typeof data === 'string' && data.includes('<html>')) {
-            throw new Error('Received HTML error page instead of JSON');
-        }
-
-        console.log('API Response:', data); // API 응답 데이터 확인
+        console.log('API Response:', data);
         displayFoodItems(data);
     } catch (error) {
         console.error('Error fetching food data:', error.message);
@@ -25,7 +19,6 @@ async function fetchMonthlyFood() {
 function displayFoodItems(data) {
     const foodContainer = document.getElementById('food-container');
 
-    // 응답 데이터 구조에 맞게 처리
     if (!data.items || data.items.length === 0) {
         console.error('No items found in the response');
         return;
