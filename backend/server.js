@@ -10,14 +10,14 @@ app.use(express.json());
 
 // 프록시 API 엔드포인트
 app.get('/api/food', async (req, res) => {
-    const NONGSARO_API_URL = 'https://www.nongsaro.go.kr/service/api/todayDish'; // Nongsaro API 엔드포인트 (확인 필요)
-    const SERVICE_KEY = '20240930BMFN7QZWMDHIZONL1QOAPQ'; // 제공된 서비스 키
+    const NONGSARO_API_URL = 'https://www.nongsaro.go.kr/portal/todayDishDtl.ps'; // 실제 API URL로 확인 필요
+    const SERVICE_KEY = '20240930BMFN7QZWMDHIZONL1QOAPQ'; // 서비스 키
 
     try {
         // Nongsaro API로 요청을 보내고 응답을 받아옴
         const response = await axios.get(NONGSARO_API_URL, {
             params: {
-                menuId: 'PS00001', // 문서에 따라 수정
+                menuId: 'PS00001', // 필요한 파라미터로 수정 필요
                 serviceKey: SERVICE_KEY
             }
         });
