@@ -4,9 +4,12 @@
   "description": "This month's food info app",
   "main": "frontend/index.html",
   "scripts": {
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "server": "node backend/server.js" // 백엔드 서버를 실행하는 명령 추가
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "cors": "^2.8.5"
   }
 }
