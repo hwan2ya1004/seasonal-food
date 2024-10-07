@@ -10,15 +10,16 @@ app.use(express.json());
 
 // 프록시 API 엔드포인트
 app.get('/api/food', async (req, res) => {
-    const NONGSARO_API_URL = 'https://www.nongsaro.go.kr/portal/todayDishDtl.ps'; // 실제 API URL로 확인 필요
-    const SERVICE_KEY = '20240930BMFN7QZWMDHIZONL1QOAPQ'; // 서비스 키
+    const NONGSARO_API_URL = 'http://api.nongsaro.go.kr/service/monthFd/monthFdLst'; // Nongsaro API 엔드포인트
+    const SERVICE_KEY = '20240930BMFN7QZWMDHIZONL1QOAPQ'; // 발급받은 서비스 키
 
     try {
         // Nongsaro API로 요청을 보내고 응답을 받아옴
         const response = await axios.get(NONGSARO_API_URL, {
             params: {
-                menuId: 'PS00001', // 필요한 파라미터로 수정 필요
-                serviceKey: SERVICE_KEY
+                apiKey: SERVICE_KEY, // API 키
+                year: req.query.year || '2024', // 기본 연도 2024
+                month: req.query.month || '10', // 기본 월 10월
             }
         });
 
